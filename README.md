@@ -1,0 +1,33 @@
+# PDF翻訳・HTML化
+
+PDFの本文を翻訳し、図表、数式、脚注、参考文献などを原文と照合しやすいHTMLにまとめるためのスキル。画像の抽出、HTML表の再構成、リンクや収録内容の確認を含む。翻訳はPDFを読み取って作業するエージェントが行い、このリポジトリ単体で自動翻訳コマンドを提供するものではない。
+
+## 使い方
+
+1. 翻訳したいPDFを `inputs/` に置く。フォルダがない場合は作成する。
+2. スキルを利用できるエージェントに `skills/pdf-translate-html/SKILL.md` を指定し、対象PDFと翻訳先の言語を伝えて翻訳・HTML化を依頼する。言語を指定しない場合は依頼文の言語を使う。
+3. 作成された `outputs/<元PDFの拡張子を除いたファイル名>/index.html` をブラウザで開く。HTMLと同じフォルダ内の画像などは位置関係を保つ。
+
+スキルの実行にはPDFを調べる `pdfinfo`、`pdftotext`、`pdfimages` などのツールが必要。画像化されたページには、別途OCR（光学文字認識）または目視確認が必要になる場合がある。ユーザーが言語や保存先を指定した場合はその指定を優先する。
+
+## 入出力
+
+```text
+inputs/                   処理待ちのPDF
+outputs/<PDFのファイル名>/  翻訳HTMLと画像などの成果物
+executed_files/           処理済みの入力PDFと作業ファイル
+skills/pdf-translate-html/SKILL.md  スキル本体
+```
+
+処理と検証が完了した `inputs/` 内のPDFは `executed_files/` に移動する。指定された入力元が `inputs/` 以外の場合は移動しない。保存先に同名の成果物フォルダやPDFがある場合は上書きせず、別の保存先を確認する。
+
+既存の翻訳例は [Language Models are Unsupervised Multitask Learners のHTML](outputs/language_models_are_unsupervised_multitask_learners/index.html) から閲覧できる。HTMLは `executed_files/` 内の原PDFを参照する。`executed_files/validate_html.py` はこの翻訳例専用の構造・リンク検証スクリプトで、任意のPDFの成果物にそのまま適用できるものではない。
+
+PDFファイルは拡張子の大文字・小文字を問わずGitの管理対象外。クローン後に翻訳例のHTMLから原PDFを参照するには、原PDFを別途 `executed_files/` に配置する。
+
+## 注意点
+
+- 翻訳には解釈が伴う。厳密な引用や専門的な判断には原PDFを参照する。
+- スキャンや複数段組、複雑な数式、図中の文字は正しく抽出できない場合がある。未翻訳箇所や確認できなかった箇所は成果物または報告で確認する。
+- PDFの内容は取り扱い権限を確認する。外部サービスへの送信や公開は依頼の範囲と権限に従う。
+- HTMLを単独で移動すると画像や原PDFへのリンクが切れる。関連ファイルの位置関係を保つ。

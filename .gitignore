@@ -1,0 +1,23 @@
+# 秘密情報とローカル設定
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# PDFファイル
+*.[pP][dD][fF]
+
+# Python環境とキャッシュ
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# エディタとOSの一時ファイル
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
