@@ -4,6 +4,17 @@
 !.env.example
 !.env.sample
 
+# 入出力データと実行済みファイル（ディレクトリ維持用の .gitkeep を除く）
+/inputs/**
+!/inputs/**/
+!/inputs/**/.gitkeep
+/outputs/**
+!/outputs/**/
+!/outputs/**/.gitkeep
+/executed_files/**
+!/executed_files/**/
+!/executed_files/**/.gitkeep
+
 # PDFファイル
 *.[pP][dD][fF]
 

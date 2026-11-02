@@ -15,15 +15,14 @@ PDFの本文を翻訳し、図表、数式、脚注、参考文献などを原�
 ```text
 inputs/                   処理待ちのPDF
 outputs/<PDFのファイル名>/  翻訳HTMLと画像などの成果物
-executed_files/           処理済みの入力PDFと作業ファイル
+executed_files/           処理済みの入力PDF
+executed_files/<PDFのファイル名>/  抽出テキストなどの中間生成物
 skills/pdf-translate-html/SKILL.md  スキル本体
 ```
 
-処理と検証が完了した `inputs/` 内のPDFは `executed_files/` に移動する。指定された入力元が `inputs/` 以外の場合は移動しない。保存先に同名の成果物フォルダやPDFがある場合は上書きせず、別の保存先を確認する。
+処理と検証が完了した `inputs/` 内のPDFは `executed_files/` に移動する。指定された入力元が `inputs/` 以外の場合は移動しない。保存先に同名の成果物フォルダ、中間生成物フォルダやPDFがある場合は上書きせず、別の保存先を確認する。
 
-既存の翻訳例は [Language Models are Unsupervised Multitask Learners のHTML](outputs/language_models_are_unsupervised_multitask_learners/index.html) から閲覧できる。HTMLは `executed_files/` 内の原PDFを参照する。`executed_files/validate_html.py` はこの翻訳例専用の構造・リンク検証スクリプトで、任意のPDFの成果物にそのまま適用できるものではない。
-
-PDFファイルは拡張子の大文字・小文字を問わずGitの管理対象外。クローン後に翻訳例のHTMLから原PDFを参照するには、原PDFを別途 `executed_files/` に配置する。
+`inputs/`、`outputs/`、`executed_files/` の内容は `.gitkeep` を除きGitの管理対象外。PDFファイルも拡張子の大文字・小文字を問わず管理対象外。
 
 ## 注意点
 
